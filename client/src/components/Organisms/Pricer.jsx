@@ -76,8 +76,6 @@ export function Pricer(){
                         style={{ width: "400px", height: "150px" }}
                     />
                     <label htmlFor="textarea">Paste Deck</label>
-
-                    {/* Button positioned at the bottom right */}
                     <button 
                         type="button" 
                         className="btn btn-primary position-absolute end-0 mt-2 mb-3 mr-3" 
