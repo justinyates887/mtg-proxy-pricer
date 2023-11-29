@@ -53,3 +53,22 @@ code {
 .form-control::-ms-input-placeholder { /* Microsoft Edge */
   color: #EDEDED;
 }
+
+.loading-card {
+  display: inline-block;
+  position: relative;
+  height: 325px;
+  width: 240px;
+  background: linear-gradient(90deg, #111111, #0e0e0e, #111111);
+  background-size: 200% 100%;
+  animation: gradientAnimation 4s infinite linear;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: -100% 0%;
+  }
+}

@@ -8,8 +8,6 @@ const useCardListSubmit = () => {
   const dispatch = useDispatch();
   const proxyPrice = useSelector(selectProxyPrice);
 
-  const { proxyList, originalList } = useSelector(selectSortedLists);
-
   const handleListSubmit = async (list) => {
     dispatch(setCardList([]));
 
@@ -40,9 +38,9 @@ const useCardListSubmit = () => {
 
             if (!isNaN(cardPrice)) {
               if (cardPrice > proxyPrice) {
-                newProxyCost += proxyPrice;
+                newProxyCost += (proxyPrice * quantity);
               } else {
-                newOriginalCost += cardPrice;
+                newOriginalCost += (cardPrice * quantity);
               }
             }
           } else if (response === 400){

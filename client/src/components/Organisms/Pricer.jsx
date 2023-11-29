@@ -1,28 +1,38 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useCardListSubmit from '../../hooks/useCardListSubmit';
-import { Card, Navbar } from '../Molecules';
-import { setListView, setProxyPrice } from '../../actions/actions';
+import { Navbar, LoadingCard } from '../Molecules';
+import { setListView } from '../../actions/actions';
 import { selectSortedLists } from '../../selectors/selectors';
+import { CardArea } from './CardArea';
+import { LoadingCardArea } from './LoadingCardArea';
 
 export function Pricer(){
     const { proxyList, originalList } = useSelector(selectSortedLists);
-
     const [isCopied, setIsCopied] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleListSubmit = useCardListSubmit();
     const dispatch = useDispatch();
 
     const cardList = useSelector((state) => state.cardList)
     const listView = useSelector((state) => state.listView)
-    const proxyPrice = useSelector((state) => state.proxyPrice)
 
-    const handleSubmit = () => {
-        let textarea = document.getElementsByName('cardList')[0];
-        let cardListValue = textarea.value.split('\n');
-        
-        handleListSubmit(cardListValue);
-    }
+    const handleSubmit = async () => {
+        setIsLoading(true);
+    
+        try {
+          let textarea = document.getElementsByName('cardList')[0];
+          let cardListValue = textarea.value.split('\n');
+    
+          await handleListSubmit(cardListValue);
+    
+        } catch (error) {
+          console.error('Error submitting the list:', error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
 
     const handleSelectChange = (event) => {
         dispatch(setListView(event.target.value))
@@ -60,9 +70,6 @@ export function Pricer(){
           });
       };
 
-    //TODO: Add context for cards that could not be found
-    //TODO: Allow user to remove card (for already owned)
-
     return ( 
         <>
             <Navbar />
@@ -85,7 +92,7 @@ export function Pricer(){
                     </button>
                 </div>
             </div>
-            <div className="row flex justify-content-end align-items-center">
+            <div className="row flex justify-content-end align-items-center" style={{ maxWidth: "100vw"}}>
                 <div className="col-1 ms-auto me-1 ps-5">
                     <i 
                         className={isCopied ? 'bi bi-check-lg' : 'bi bi-copy'} 
@@ -101,47 +108,7 @@ export function Pricer(){
                     </select>
                 </div>
             </div>
-
-            <div className="cardArea">
-                <div className="row justify-content-center">
-                    {(() => {
-                    switch (listView) {
-                        case "Proxy":
-                        return (
-                            <>
-                            {proxyList.map((card) => (
-                                <div key={card.name} className="col-lg-4 col-md-6 col-sm-12 p-0 m-0" style={{width: "250px"}}>
-                                <Card name={card.name} img={card.imageURL} price={proxyPrice} qty={card.quantity} />
-                                </div>
-                            ))}
-                            </>
-                        );
-                        case "Original":
-                        return (
-                            <>
-                            {originalList.map((card) => (
-                                <div key={card.name} className="col-lg-4 col-md-6 col-sm-12 p-0 m-0" style={{width: "250px"}}>
-                                <Card name={card.name} img={card.imageURL} price={card.price} qty={card.quantity} />
-                                </div>
-                            ))}
-                            </>
-                        );
-                        case "All":
-                        return (
-                            <>
-                            {cardList.map((card) => (
-                                <div key={card.name} className="col-lg-4 col-md-6 col-sm-12 p-0 m-0" style={{width: "250px"}}>
-                                <Card name={card.name} img={card.imageURL} price={card.price} qty={card.quantity} />
-                                </div>
-                            ))}
-                            </>
-                        );
-                        default:
-                        return null;
-                    }
-                    })()}
-                </div>
-            </div>
+            {isLoading ? <LoadingCardArea /> : <CardArea />}
         </>
     )
 }
