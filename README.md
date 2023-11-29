@@ -6,13 +6,15 @@ The tool will sort your deck into two categories, Proxy and Original. If the pri
 
 Currently, card prices are only shown from their original set.
 
-#### Known Bugs
+### Known Bugs
 
 [] Cards not found does not indicate to user.
 
-[] Wrong math??? Card count on dropdown does not meet expectation. Might be missing some refs for images, or price calculation error. Array count of cards found is correct.
+[x] Wrong math??? Card count on dropdown does not meet expectation. Might be missing some refs for images, or price calculation error. Array count of cards found is correct. *11/29/23 (Issue was resolved in selector. Did not account for null prices)*
 
-#### Future Features
+[x] Price totals do not account for quantity *11/29/23*
+
+### Future Features
 
 [] Remove card for already owned cards instead of having to remove them from list
 
@@ -26,6 +28,10 @@ Currently, card prices are only shown from their original set.
 
 [] Add tooltip hover to price breakdown
 
-[] Add loading context to cardspace when API request is loading
+[x] Add loading context to cardspace when API request is loading
 
 [] Find a way to optimize API call ???
+
+### Code Improvements
+
+[] Refactor components into smaller pieces to fit with Single use principle
