@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useCardListSubmit from '../../hooks/useCardListSubmit';
-import { Navbar, LoadingCard } from '../Molecules';
+import { Navbar, Intro, Footer } from '../Molecules';
 import { setListView } from '../../actions/actions';
 import { selectSortedLists } from '../../selectors/selectors';
 import { CardArea } from './CardArea';
@@ -74,6 +74,7 @@ export function Pricer(){
         <>
             <Navbar />
             <div className="d-flex flex-column align-items-center justify-content-center">
+                <Intro />
                 <div className="form-floating mt-5 mb-5 position-relative">
                     <textarea 
                         className="dark form-control" 
@@ -109,6 +110,7 @@ export function Pricer(){
                 </div>
             </div>
             {isLoading ? <LoadingCardArea /> : <CardArea />}
+            <Footer />
         </>
     )
 }
