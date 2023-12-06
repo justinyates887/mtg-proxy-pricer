@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCardPrice } from '../utils/axios';
-import { setCardList, setProxyCost, setOriginalCost } from '../actions/actions';
-import { selectSortedLists, selectProxyPrice } from '../selectors/selectors';
+import { setCardList, setProxyCost, setOriginalCost, setNotFoundList } from '../actions/actions';
+import { selectProxyPrice } from '../selectors/selectors';
 
 const useCardListSubmit = () => {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const useCardListSubmit = () => {
     dispatch(setCardList([]));
 
     const newCards = [];
+    const notFound = [];
     let newProxyCost = 0;
     let newOriginalCost = 0;
 
@@ -44,18 +45,21 @@ const useCardListSubmit = () => {
               }
             }
           } else if (response === 400){
-                console.log(`Could not find ${element}`);
+                notFound.push(cardName);
             }
         } catch (error) {
-          console.error(`Error fetching card ${cardName} price:`, error);
+          notFound.push(element)
         }
       } else {
-        console.error(`Invalid input format: ${element}`);
+        if(element !== ""){
+            notFound.push(element)
+        }
       }
     }
 
     // Update Redux store variables
     dispatch(setCardList(newCards));
+    dispatch(setNotFoundList(notFound));
     dispatch(setProxyCost(newProxyCost));
     dispatch(setOriginalCost(newOriginalCost));
   };

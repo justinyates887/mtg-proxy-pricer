@@ -8,7 +8,7 @@ Currently, card prices are only shown from their original set.
 
 ### Known Bugs
 
-[ ] Cards not found does not indicate to user.
+[x] Cards not found does not indicate to user. *12/06/23*
 
 [x] Wrong math??? Card count on dropdown does not meet expectation. Might be missing some refs for images, or price calculation error. Array count of cards found is correct. *11/29/23 (Issue was resolved in selector. Did not account for null prices)*
 
@@ -18,7 +18,7 @@ Currently, card prices are only shown from their original set.
 
 [ ] Remove card for already owned cards instead of having to remove them from list
 
-[ ] Ability to select from different sets
+[ ] Ability to select from different sets / arts
 
 [ ] Possible TCGPlayer integration for easy checkout (depends on price/ability)
 
@@ -26,7 +26,7 @@ Currently, card prices are only shown from their original set.
 
 [x] Add description/intro on how to use tool
 
-[ ] Add tooltip hover to price breakdown
+[x] Add tooltip hover to price breakdown
 
 [x] Add loading context to cardspace when API request is loading
 

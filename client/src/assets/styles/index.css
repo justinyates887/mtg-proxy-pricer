@@ -94,3 +94,25 @@ a {
     background-position: -100% 0%;
   }
 }
+
+.closebtn {
+  padding-left: 10px;
+  color: #888;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.closebtn:hover {
+  color: #000;
+}
+
+.error-chip {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  height: 25px;
+  font-size: 14px;
+  border-radius: 25px;
+  background-color: #BE314490;
+}

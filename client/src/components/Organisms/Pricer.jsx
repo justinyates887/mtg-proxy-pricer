@@ -6,6 +6,7 @@ import { setListView } from '../../actions/actions';
 import { selectSortedLists } from '../../selectors/selectors';
 import { CardArea } from './CardArea';
 import { LoadingCardArea } from './LoadingCardArea';
+import { ErrorChip } from '../Atoms';
 
 export function Pricer(){
     const { proxyList, originalList } = useSelector(selectSortedLists);
@@ -17,6 +18,7 @@ export function Pricer(){
 
     const cardList = useSelector((state) => state.cardList)
     const listView = useSelector((state) => state.listView)
+    const notFoundList = useSelector((state) => state.notFoundList)
 
     const handleSubmit = async () => {
         setIsLoading(true);
@@ -75,7 +77,14 @@ export function Pricer(){
             <Navbar />
             <div className="d-flex flex-column align-items-center justify-content-center">
                 <Intro />
-                <div className="form-floating mt-5 mb-5 position-relative">
+                <div className="mt-5 mb-1">
+                {notFoundList.map((card) => {
+                      return (
+                        <ErrorChip card={card} />
+                      )
+                })}
+                </div>
+                <div className="form-floating mb-5 position-relative">
                     <textarea 
                         className="dark form-control" 
                         name="cardList" 

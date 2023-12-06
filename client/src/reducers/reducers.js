@@ -1,5 +1,6 @@
 const initialState = {
     cardList: [],
+    notFoundList: [],
     proxyPrice: 1.00,
     proxyCost: 0.00,
     originalCost: 0.00,
@@ -9,10 +10,9 @@ const initialState = {
   const reducer = (state = initialState, action) => {
     switch (action.type) {
         case "SET_CARD_LIST":
-            return {
-                ...state,
-                cardList: action.payload,
-            };
+            return {...state, cardList: action.payload }
+        case "SET_NOT_FOUND_LIST":
+            return {...state, notFoundList: action.payload }
         case "SET_PROXY_PRICE":
             return { ...state, proxyPrice: action.payload }
         case "SET_LIST_VIEW":

@@ -3,6 +3,11 @@ export const setCardList = (list) => ({
     payload: list
 })
 
+export const setNotFoundList = (list) => ({
+    type: "SET_NOT_FOUND_LIST",
+    payload: list
+})
+
 export const setProxyPrice = (price) => ({
     type: "SET_PROXY_PRICE",
     payload: parseFloat(price.toFixed(2))
